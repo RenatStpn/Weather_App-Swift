@@ -21,43 +21,12 @@ class CurrentWeatherManager {
         return decodedWeather
         }
     }
-//let a = CurrentWeatherManager()
+
+
+//Unrealised method let a = CurrentWeatherManager()
 // , completion: @escaping (weatherDecoded?, Error?) -> Void
 //a.getCurrentWeather(latitude: 0, longtitude: 0) { weather, error in
 //    if let error = error else {
 //
 //    }
 //}
-struct WeatherBody: Decodable {
-    var coord: CoordinatesResponse
-    var weather: [WeatherResponse]
-    var main: MainResponse
-    var name: String
-    var wind: WindResponse
-
-    struct CoordinatesResponse: Decodable {
-        var lon: Double
-        var lat: Double
-    }
-
-    struct WeatherResponse: Decodable {
-        var id: Double
-        var main: String
-        var description: String
-        var icon: String
-    }
-
-    struct MainResponse: Decodable {
-        var temp: Double
-        var feels_like: Double
-        var temp_min: Double
-        var temp_max: Double
-        var pressure: Double
-        var humidity: Double
-    }
-    
-    struct WindResponse: Decodable {
-        var speed: Double
-        var deg: Double
-    }
-}
