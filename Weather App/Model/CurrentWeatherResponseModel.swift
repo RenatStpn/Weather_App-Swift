@@ -23,6 +23,22 @@ func getDataFromJSON(_ filename: String) -> WeatherBody{
         fatalError("Couldn't parse data")
     }
 }
+var previewCitys: CityResponse = getDataFromJSON("citys.json")
+func getDataFromJSON(_ filename: String) -> CityResponse{
+    let jsonData: Data
+    guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
+        else {
+        return CityResponse(data: [], links: [])
+    }
+    jsonData = try! Data(contentsOf: file)
+  
+    do {
+        let decoder = JSONDecoder()
+        return try decoder.decode(CityResponse.self, from: jsonData)
+    } catch {
+        fatalError("Couldn't parse data")
+    }
+}
 struct WeatherBody: Decodable {
     var coord: CoordinatesResponse
     var weather: [WeatherResponse]
@@ -56,3 +72,30 @@ struct WeatherBody: Decodable {
         var deg: Double
     }
 }
+struct CityResponse: Decodable {
+    struct City: Decodable, Identifiable {
+        var id: Int
+        var wikyDataId: String
+        var name : String
+        var country: String
+        var countryCode: String
+        var region: String
+        var regionCode: String
+        var regionWdId: String
+        var latitude: Double
+        var longtitude:Double
+        var population: Int
+    }
+    struct Links: Decodable {
+        var rel: String
+        var href: String
+    }
+    var data: [City]
+       
+    var links: [Links]
+        
+    struct metadata: Decodable {
+        var currentOffset: Int
+        var totalCount: Int
+      }
+    }

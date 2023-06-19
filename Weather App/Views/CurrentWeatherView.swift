@@ -11,6 +11,7 @@ struct CurrentWeatherView: View {
     var currentWeather: WeatherBody
     var body: some View {
         VStack{
+    
             VStack {
                 Text(currentWeather.name).font(.largeTitle).bold()
                 Text("Today, \(Date().formatted(.dateTime.month().day().hour().minute()))")
